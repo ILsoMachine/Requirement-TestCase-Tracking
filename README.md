@@ -25,6 +25,36 @@ python scripts/import_ebt.py
 
 ## 主实验设置
 
-BM25 提供关键词基线。语义检索使用 `sentence-transformers/all-MiniLM-L6-v2`，正式运行时记录所用权重的版本。重排组复用同一份语义检索排名，每条需求用一次请求重排前 10 个候选。主指标为 39 条需求的宏平均 Recall@5，并报告 MAP 和逐需求的排序变化。
+BM25 提供关键词基线。语义检索使用固定提交的 `sentence-transformers/all-MiniLM-L6-v2`，通过 ONNX Runtime 在 CPU 上执行。向量对序列的非填充位置取均值并做 L2 归一化。跨多个片段时取最大相似度。重排组在一次请求中评估每条需求的前 10 个语义检索候选，校验引文并按等级重新排序。同等级沿用语义检索顺序，第 11 名及之后沿用原排名。主指标为 39 条需求的宏平均 Recall@5，并报告 MAP 和逐需求的变化。
 
 重排模型定为 DeepSeek V4.1 Flash，API 模型 ID 为 `deepseek-flash`。2026-11-24 查到的服务端版本为 `DeepSeek-V4.1-Flash-1017`。主实验显式关闭思考模式，记录正式运行日期、模型版本与每次请求的 token 用量，并保存响应以便离线复评分。 [DeepSeek 模型与价格](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/) · [思考模式设置](https://api-docs.deepseek.com/zh-cn/guides/thinking_mode/)
+
+## 运行与复现
+
+用 Python 3.12 创建虚拟环境，从项目根目录运行。已有实验目录可直接离线重新评分，评分阶段只依赖 Python 标准库。
+
+```powershell
+python -m experiment.run score --run-dir results/ebt-20261124
+```
+
+如需重新执行全部实验，在激活的虚拟环境中运行以下命令。模型下载可使用当前终端的 `HTTPS_PROXY`。DeepSeek 密钥通过 `DEEPSEEK_API_KEY` 环境变量或 Git 忽略的 `model.local.json` 中的 `api_key` 读取。另选一个运行目录可以保留已发布的实验。
+
+```powershell
+python -m pip install -r requirements.txt
+python -m experiment.download
+python -m experiment.run smoke --run-dir results/ebt-reproduction
+python -m experiment.run baselines --run-dir results/ebt-reproduction
+python -m experiment.run rerank --run-dir results/ebt-reproduction
+python -m experiment.run score --run-dir results/ebt-reproduction
+```
+
+重排阶段在每条需求返回后立即保存请求正文、原始响应、校验结果和最终排名。中断后可在同一运行目录重启重排，已保存的查询会被跳过。延迟以本机语义向量索引已建立为起点，重排组计入 API 请求与校验。评分阶段只读取已经保存的排名和参考矩阵。
+
+| 路径 | 内容 |
+| --- | --- |
+| `config/ebt.json` | 模型提交和校验和、BM25 参数、候选数、随机种子、重试规则 |
+| `prompts/` | 评分准则、任务提示和引文校验要求 |
+| `experiment/` | 权重下载、两组检索、API 重排与离线评分脚本 |
+| `results/ebt-20261124/` | 本轮配置快照、排名、请求和响应、逐需求对比及汇总 |
+
+本轮指标和代表性案例见 [实验结果分析](results/ebt-20261124/analysis.md)。

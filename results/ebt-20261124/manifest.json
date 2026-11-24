@@ -1,0 +1,27 @@
+{
+  "started_at_utc": "2026-11-24T12:16:36.771267+00:00",
+  "software": {
+    "python": "3.12.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "numpy": "2.4.1",
+    "onnxruntime": "1.23.2",
+    "tokenizers": "0.22.1",
+    "requests": "2.32.5"
+  },
+  "ranking_input_sha256": {
+    "requirements.csv": "e38462cccce24baa02797a47e15fc20bc876735198a27dc867ad841988379781",
+    "test_cases.csv": "b76e56a692cf7c789a6649ca563baa3213910d1dcda6e6f8a0485d01626ac493"
+  },
+  "script_sha256": {
+    "common.py": "733b1bf2319cd90bcf87e26279ceb55f12b5f913b3bec06796225637e2075b6d",
+    "download.py": "049316b3387731a200a4465dd7e8ef8cb5e6daf60684e02dae8f89a1c1b1067f",
+    "evaluate.py": "1eaa9edbcd7fe5b803d182961292030fa622261db4527e426e6bfd2c7e2aa1a1",
+    "rerank.py": "d91adc956d757224c7849d98953a911e65eeabfbf514359d060e33c862fa1de3",
+    "retrieval.py": "064cde7f2df1d789cc7f32d679e6c0d179c0d28b71409d1496d2639ae5840818",
+    "run.py": "9f77ef88591d3cd15b59c4a972a26d18d3b21726f1452c97dc15823645490194"
+  },
+  "embedding_files_sha256": {
+    "model.onnx": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+    "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+  }
+}

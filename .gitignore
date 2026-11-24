@@ -1,4 +1,7 @@
 /参考/
 
 /.venv/
+/.cache/
+/model.local.json
+/.env
 __pycache__/
