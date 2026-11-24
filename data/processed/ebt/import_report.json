@@ -1,0 +1,47 @@
+{
+  "source_repository": "https://github.com/huiAlex/TRIAD",
+  "source_commit": "524929e892dd39b8b370ffeef17b4c6962210e07",
+  "source_files": {
+    "Requirements.csv": {
+      "source_path": "dataset/ebt/originals/requirements/Requirements.csv",
+      "sha256": "e38462cccce24baa02797a47e15fc20bc876735198a27dc867ad841988379781",
+      "bytes": 4002,
+      "encoding": "UTF-8 (ASCII subset)",
+      "line_endings": "LF",
+      "format": "comma-separated CSV"
+    },
+    "TestCases.csv": {
+      "source_path": "dataset/ebt/originals/testcases/TestCases.csv",
+      "sha256": "be428c235ac8f3b3a59cfe420c1c0ecedad84fa4cdb96775902c01002a323689",
+      "bytes": 10493,
+      "encoding": "UTF-8 (ASCII subset)",
+      "line_endings": "LF",
+      "format": "comma-separated CSV"
+    },
+    "req-tc.txt": {
+      "source_path": "dataset/ebt/trace_matrices/req-tc.txt",
+      "sha256": "b48d2d69d75d228c9910a23a9d92c7f31ed1e6dcd37a80519f87c922788b2002",
+      "bytes": 408,
+      "encoding": "UTF-8 (ASCII subset)",
+      "line_endings": "LF",
+      "format": "whitespace-separated"
+    }
+  },
+  "counts": {
+    "requirements": 41,
+    "test_cases": 25,
+    "reference_links": 51,
+    "requirements_with_reference_links": 39,
+    "requirements_without_reference_links": 2,
+    "test_cases_with_reference_links": 25,
+    "test_cases_without_reference_links": 0,
+    "test_cases_with_title_references_removed": 25
+  },
+  "requirement_ids_without_reference_links": [
+    "100",
+    "101"
+  ],
+  "reference_link_counts_over_five": {
+    "120": 6
+  }
+}
