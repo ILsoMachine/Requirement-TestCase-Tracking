@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>需求追踪审查</title>
+  <link rel="stylesheet" href="/demo.css">
+  <script src="/demo.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="shell heading">
+      <div>
+        <h1>需求追踪审查</h1>
+        <p>对比需求对应的测试用例，查看证据并确认追踪链接。</p>
+      </div>
+      <a href="#links" class="secondary">已确认链接 <span id="link-count">0</span></a>
+    </div>
+  </header>
+  <main class="shell">
+    <form id="controls" class="panel controls">
+      <label>项目<select id="project"></select></label>
+      <label>需求<select id="query"></select></label>
+      <label>对比方法<select id="treatment"></select></label>
+      <label>运行方式
+        <select id="mode">
+          <option value="archive">归档回放</option>
+          <option value="live">实时检索 + 实时重排</option>
+          <option value="local">仅实时检索（离线）</option>
+        </select>
+      </label>
+      <button type="submit" id="run" disabled>运行</button>
+    </form>
+    <p id="status" class="status" role="status">正在加载项目数据…</p>
+    <section class="panel requirement">
+      <div class="section-heading"><h2>当前需求</h2><span class="id" id="requirement-id"></span></div>
+      <p id="requirement-text" lang="en"></p>
+    </section>
+    <section class="rankings" aria-label="排名对比">
+      <div class="panel ranking">
+        <div class="section-heading"><h2 id="before-heading">检索前 5</h2><span class="time" id="before-time"></span></div>
+        <ol id="before"></ol>
+      </div>
+      <div class="panel ranking after">
+        <div class="section-heading"><h2 id="after-heading">重排前 5</h2><span class="time" id="after-time"></span></div>
+        <ol id="after"></ol>
+        <p id="after-empty" class="quiet" hidden>切换到实时重排或归档回放以查看重排结果。</p>
+      </div>
+    </section>
+    <section id="evidence" class="panel evidence" hidden>
+      <div class="section-heading">
+        <div><h2>候选用例 <span id="evidence-id" class="id"></span></h2><p id="grade" class="quiet"></p></div>
+        <button id="confirm" type="button">确认追踪链接</button>
+      </div>
+      <div id="reason" class="reason" hidden></div>
+      <div class="documents">
+        <div><h3>需求原文</h3><p id="requirement-quote" lang="en"></p></div>
+        <div><h3>用例原文</h3><p id="case-quote" lang="en"></p></div>
+      </div>
+      <p id="confirmation" class="quiet" role="status"></p>
+    </section>
+    <section id="links" class="panel links">
+      <div class="section-heading">
+        <h2>已确认链接</h2>
+        <button class="secondary" id="export" type="button" disabled>导出 CSV</button>
+      </div>
+      <label>按用例反查需求<select id="reverse" disabled></select></label>
+      <ul id="reverse-results"></ul>
+    </section>
+  </main>
+</body>
+</html>
