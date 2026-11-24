@@ -1,7 +1,14 @@
 [
   {
+    "source": "ebt-20261124",
+    "started_at_utc": "2026-11-24T12:17:04.579379+00:00",
+    "workers": 1,
+    "pending_jobs": 39
+  },
+  {
     "started_at_utc": "2026-11-24T12:44:59.106573+00:00",
     "workers": 16,
-    "pending_jobs": 1098
+    "pending_jobs": 1098,
+    "source": "expansion"
   }
 ]

@@ -26,10 +26,9 @@ EBT 的导入脚本验证上游文件的 SHA-256、主键和参考链接，去�
 
 | 路径 | 内容 |
 | --- | --- |
-| `config.json`、`prompts.json`、`manifest.json`、`execution.json` | 冻结配置、提示词、文件校验和及运行记录 |
-| `summary.csv`、`summary.json`、`contrasts.csv` | 15 个项目与方法组合的指标、API 用量和配对区间 |
+| `config.json`、`prompts.json`、`manifest.json`、`execution.json` | 冻结配置、提示词、各批次来源和文件校验和 |
+| `summary.csv`、`summary.json`、`contrasts.csv` | 15 个项目与方法组合的指标、合计和分组 API 用量、证据校验统计与配对区间 |
 | `{ebt,mozilla,edc}/` | 各项目的基线排名、逐需求评分、配对变化和三组原始 API 请求／响应 |
-| `ebt/initial/` | EBT 首轮的报告、评分和原始运行清单。首轮基线和响应存放在 EBT 的对应组别中 |
 
 [实验汇总及案例](results/experiment-20261124/analysis.md)
 

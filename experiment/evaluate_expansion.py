@@ -82,10 +82,14 @@ def score_project(run_dir, dataset, config, manifest):
     query_records = []
     usage = {}
     counts = {}
+    evidence_status = {}
+    response_models = {}
     request_ids = set()
     for method in ("bm25", "semantic", *treatments):
         usage[method] = Counter()
         counts[method] = Counter()
+        evidence_status[method] = Counter()
+        response_models[method] = set()
         for query_id, related in sorted(references.items()):
             parameters = treatments.get(method)
             ceiling, cutoff = "", ""
@@ -99,11 +103,13 @@ def score_project(run_dir, dataset, config, manifest):
                 counts[method]["attempts"] += len(row["attempts"])
                 counts[method]["retried_queries"] += len(row["attempts"]) > 1
                 counts[method][row["status"]] += 1
-                counts[method]["invalid_evidence"] += sum(
-                    grade["evidence_status"] == "invalid" for grade in (row["assessments"] or {}).values()
+                evidence_status[method].update(
+                    grade["evidence_status"] for grade in (row["assessments"] or {}).values()
                 )
                 for attempt in row["attempts"]:
                     response = attempt.get("response") or {}
+                    if response.get("model"):
+                        response_models[method].add(response["model"])
                     if response.get("id"):
                         if response["id"] in request_ids:
                             raise ValueError(f"{dataset}: duplicate response ID for {method}")
@@ -161,7 +167,11 @@ def score_project(run_dir, dataset, config, manifest):
                 "reference_ids": sorted(references[query_id]),
                 "before_top5": before_row["ranked_ids"][:display_k],
                 "after_top5": after_row["ranked_ids"][:display_k],
+                "before_top10": before_row["ranked_ids"][:10],
+                "before_recall_at_5": before_row["recall_at_5"],
+                "after_recall_at_5": after_row["recall_at_5"],
                 "delta_recall_at_5": deltas["recall_at_5"], "delta_ap": deltas["ap"],
+                "after_rerank_recall_at_5_ceiling": after_row["rerank_recall_at_5_ceiling"],
             })
             for metric, delta in deltas.items():
                 per_metric[metric].append(delta)
@@ -180,8 +190,29 @@ def score_project(run_dir, dataset, config, manifest):
     write_csv(run_dir / dataset / "paired.csv", paired_rows)
     detail = {"reference_links_sha256": file_hash(reference_path), "api": {}}
     for method in treatments:
-        detail["api"][method] = {"counts": dict(counts[method]), "usage": dict(usage[method])}
+        counts[method]["invalid_evidence"] = evidence_status[method]["invalid"]
+        detail["api"][method] = {
+            "counts": dict(counts[method]),
+            "usage": dict(usage[method]),
+            "response_models": sorted(response_models[method]),
+            "evidence_status_counts": dict(sorted(evidence_status[method].items())),
+        }
     return summary, contrasts, detail
+
+
+def aggregate_api(details):
+    counts, usage, evidence = Counter(), Counter(), Counter()
+    models = set()
+    for project in details.values():
+        for result in project["api"].values():
+            counts.update(result["counts"])
+            usage.update(result["usage"])
+            evidence.update(result["evidence_status_counts"])
+            models.update(result["response_models"])
+    return {
+        "counts": dict(counts), "usage": dict(usage), "response_models": sorted(models),
+        "evidence_status_counts": dict(sorted(evidence.items())),
+    }
 
 
 def evaluate(run_dir):
@@ -196,4 +227,9 @@ def evaluate(run_dir):
         print(f"{dataset}: scored {len(results)} methods", flush=True)
     write_csv(run_dir / "summary.csv", summaries)
     write_csv(run_dir / "contrasts.csv", contrasts)
-    write_json(run_dir / "summary.json", {"methods": summaries, "contrasts": contrasts, "details": details})
+    write_json(run_dir / "summary.json", {
+        "methods": summaries,
+        "contrasts": contrasts,
+        "details": details,
+        "api_totals": aggregate_api(details),
+    })
