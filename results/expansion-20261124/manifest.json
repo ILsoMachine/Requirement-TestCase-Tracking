@@ -1,0 +1,41 @@
+{
+  "prepared_at_utc": "2026-11-24T12:44:38.629008+00:00",
+  "ranking_input_sha256": {
+    "ebt": {
+      "requirements.csv": "e38462cccce24baa02797a47e15fc20bc876735198a27dc867ad841988379781",
+      "test_cases.csv": "b76e56a692cf7c789a6649ca563baa3213910d1dcda6e6f8a0485d01626ac493"
+    },
+    "mozilla": {
+      "requirements.csv": "e375133670be0539c12b6241b1a01381b29d4aee745ccd8a9f80fe306746c5db",
+      "test_cases.csv": "4a02c6cc70d491bfc71becbc90eada41d33c977b815311c156fac0f19b3606c0"
+    },
+    "edc": {
+      "requirements.csv": "4f2c9ce8c68ed6820eb8b3a47e1cddbba2f5b0138350db448cce107f031a45a1",
+      "test_cases.csv": "70be1338ce3ea112deb4c2e0493410888f20cda3ef7e9036e68559b63a6d0a03"
+    }
+  },
+  "baselines_sha256": {
+    "ebt": "4a22bd8b257e029b2365ee8b5bcecd85bc4b2b97032d01a669c262d232b4706c",
+    "mozilla": "2546eb33891f1524dc6119772d29ac8c87dda4aafb48545bb2524e4ad19399ef",
+    "edc": "ae5a3e1025d7c24f89cb4cb341eca70579725407ad7ac4b15f02ef8f810c89ca"
+  },
+  "embedding_sha256": {
+    "model.onnx": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+    "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+  },
+  "script_sha256": {
+    "expansion.py": "97a2bb1e1fc23a4204ef0ff23c549476042807b4a19842bee18679825590ba6e",
+    "retrieval.py": "064cde7f2df1d789cc7f32d679e6c0d179c0d28b71409d1496d2639ae5840818",
+    "rerank.py": "d91adc956d757224c7849d98953a911e65eeabfbf514359d060e33c862fa1de3",
+    "import_expansion.py": "4e7b82d310754cced4f0c6c3ad5beac6ce057ab413090641f955858ffdf419fe"
+  },
+  "software": {
+    "python": "3.12.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "numpy": "2.4.1",
+    "onnxruntime": "1.23.2",
+    "requests": "2.32.5",
+    "tokenizers": "0.22.1",
+    "openpyxl": "3.1.5"
+  }
+}

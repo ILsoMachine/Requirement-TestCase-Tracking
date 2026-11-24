@@ -1,0 +1,178 @@
+id,text
+DSP-TC-501,Validation of existance of CRM
+DSP-TC-502,Catalog response to CRM
+DSP-TC-503,Validation of CRM properties @context and @type
+DSP-TC-504,"Implementation of ""filter"" property"
+DSP-TC-505,Implementation of filter expresion / query
+DSP-TC-506,Validation of implementation of DRM
+DSP-TC-507,Validation of a Dataset response to a DRM
+DSP-TC-508,Validation of returned Dataset as a valid format (DCAT)
+DSP-TC-509,Validation of DRM properties @context and @type
+DSP-TC-510,"Validation of DRM property ""dataset"""
+DSP-TC-511,Validation of response of CRM and DRM
+DSP-TC-512,Validation of ACK-Catalog Properties
+DSP-TC-513,Validation of possible number of datasets in a Catalog
+DSP-TC-514,Validation of number of Data Services in a Catalog
+DSP-TC-515,Validation of id property in Dataset
+DSP-TC-516,Validation of hasPolicy attribute with valid Offer
+DSP-TC-517,Validation of distribution property in Dataset
+DSP-TC-518,Validation of DataService object
+DSP-TC-519,Validation of id property in Offer
+DSP-TC-520,Validation of uniqueness of Offer for a Dataset
+DSP-TC-521,Validation of Catalog Error Implementation
+DSP-TC-522,Validation of Catalog Error properties
+DSP-TC-523,"Validation of ""code"" property in Catalog Error"
+DSP-TC-524,"Validation of ""reasons"" property in Catalog Error"
+DSP-TC-525,Validation of implementation of catalog/request endpoint
+DSP-TC-526,Validation of catalog/request endpoint response
+DSP-TC-527,Validation of implementation of catalog/datasets/:id endpoint
+DSP-TC-528,Validation catalog/datasets/:id endpoint reponse
+DSP-TC-530,Validation of unique identifier for Offer policy type
+DSP-TC-531,Validation of unique identifier for Agreement policy type
+DSP-TC-532,"Validation of ""target"" property in Agreement"
+DSP-TC-533,Validation of implementation of CRM
+DSP-TC-534,Validation of REQUESTED state in Contract Negotiation for CRM
+DSP-TC-535,Validation of TERMINATED state in Contract Negotiation for CRM
+DSP-TC-536,"Validation of ""type"" property in CRM"
+DSP-TC-537,"Validation of ""context"" property in CRM"
+DSP-TC-538,"Validation of ""callbackAddress"" property in CRM"
+DSP-TC-539,"Validation of ""offer"" property in CRM"
+DSP-TC-540,"Validation of ""target"" attribute inside a Contract Offer for CRM"
+DSP-TC-541,"Validation of ""consumerPid"" property for CRM"
+DSP-TC-542,Validation of implementation of COM
+DSP-TC-543,Validation of OFFERED state after successful COM
+DSP-TC-544,Validation of TERMINATED state after unsuccessful COM
+DSP-TC-545,Validation of @context property for COM
+DSP-TC-546,Validation of @type property for COM
+DSP-TC-547,"Validation of ""callbackAddress"" property in COM"
+DSP-TC-548,"Validation of ""offer"" property in COM"
+DSP-TC-549,"Validation of ""target"" attribute inside a Contract Offer for COM"
+DSP-TC-550,Validation of implementation of CAM
+DSP-TC-551,Validation of AGREED state after successful CAM
+DSP-TC-552,Validation of TERMINATED state after unsuccessful CAM
+DSP-TC-553,Validation of @context property for CAM
+DSP-TC-554,Validation of @type property for CAM
+DSP-TC-555,Validation of consumerPid property and providerPid property for CAM
+DSP-TC-556,Validation of ODRL Agreement in CAM
+DSP-TC-557,Validation of timestamp property for Agreement
+DSP-TC-558,Validation of assigner and assignee properties for Agreement
+DSP-TC-559,Validation of target property for Agreement
+DSP-TC-560,Validation of implementation of CAVM
+DSP-TC-561,Validation of VERIFIED state after successful CAVM
+DSP-TC-562,Validation of TERMINATED state after unsuccessful CAVM
+DSP-TC-563,Validation of @context property for CAVM
+DSP-TC-564,Validation of @type property for CAVM
+DSP-TC-565,Validation of consumerPid property and providerPid property for CAVM
+DSP-TC-566,Validation of error response when CAVM Contract is invalid
+DSP-TC-567,Validation of implementation of CNEM
+DSP-TC-568,Validation of FINALIZED state after CNEM with eventType FINALIZED
+DSP-TC-569,Validation of @context property for CNEM
+DSP-TC-570,Validation of @type property for CNEM
+DSP-TC-571,Validation of consumerPid property and providerPid property for CNEM
+DSP-TC-572,Validation of eventType property for CNEM
+DSP-TC-573,Validation of error response when CNEM Contract is invalid
+DSP-TC-574,Validation of ACCEPTED state after CNEM with eventType ACCEPTED
+DSP-TC-575,Validation of implementation of CNTM
+DSP-TC-576,Validation of @context property for CNTM
+DSP-TC-577,Validation of @type property for CNTM
+DSP-TC-578,Validation of consumerPid property and providerPid property for CNTM
+DSP-TC-579,Validation of TERMINATED state after exchanged CNTM
+DSP-TC-580,Validation of Implementation of Contract Negotiation ACK
+DSP-TC-581,Validation of @context property for Contract Negotiation ACK
+DSP-TC-582,Validation of @type property for Contract Negotiation ACK
+DSP-TC-583,Validation of consumerPid property and providerPid property for Contract Negotiation ACK
+DSP-TC-584,Validation of state property for Contract Negotiation ACK
+DSP-TC-585,Validation of implementation of CNE
+DSP-TC-586,Validation of @context property for CNE
+DSP-TC-587,Validation of @type property for CNE
+DSP-TC-588,Validation of consumerPid property and providerPid property for CNE
+DSP-TC-589,Validation of implementation of negotiations endpoint
+DSP-TC-590,Validation of implementation of negotiations endpoint response
+DSP-TC-591,Validation of implementation of negotiations/:providerPid/request Endpoint
+DSP-TC-592,Validation of negotiations/:providerPid/request Endpoint response
+DSP-TC-593,Validation of implementation of negotiations/:providerPid/request Endpoint
+DSP-TC-594,Validation of negotiations/:providerPid/request Endpoint response
+DSP-TC-595,Validation of implementation of negotiations/:providerPid/events Endpoint
+DSP-TC-596,Validation of negotiations/:providerPid/events Endpoint sucessful response
+DSP-TC-597,Validation of negotiations/:providerPid/events Endpoint error response
+DSP-TC-598,Validation of implementation of negotiations/:providerPid/agreement/verification Endpoint
+DSP-TC-599,Validation of negotiations/:providerPid/agreement/verification Endpoint response
+DSP-TC-600,Validation of implementation of negotiations/:providerPid/termination Endpoint
+DSP-TC-601,Validation of negotiations/:providerPid/termination Endpoint response
+DSP-TC-602,Validation of implementation of negotiations/offers Endpoint
+DSP-TC-603,Validation of negotiations/offers Endpoint response
+DSP-TC-604,Validation of implementation of negotiations/:consumerPid/offers Endpoint
+DSP-TC-605,Validation of negotiations/:consumerPid/offers Endpoint response
+DSP-TC-606,Validation of implementation of negotiations/:consumerPid/agreement Endpoint
+DSP-TC-607,Validation of negotiations/:consumerPid/agreement Endpoint response
+DSP-TC-608,Validation of implementation of negotiations/:consumerPid/events Endpoint
+DSP-TC-609,Validation of negotiations/:consumerPid/events Endpoint response
+DSP-TC-610,Validation of implementation of negotiations/:consumerPid/termination Endpoint
+DSP-TC-611,Validation of negotiations/:consumerPid/termination Endpoint response
+DSP-TC-612,Validation of implementation of TRM
+DSP-TC-613,Validation of REQUESTED state in TP after TRM
+DSP-TC-614,Validation of @context property for TRM
+DSP-TC-615,Validation of @type property for TRM
+DSP-TC-616,Validation of consumerPid property in TRM
+DSP-TC-617,Validation of agreementId property in TRM
+DSP-TC-618,Validation of format property in TRM
+DSP-TC-619,Validation of callbackAddress property
+DSP-TC-620,Validation of dataAddress property
+DSP-TC-621,Validation of TRM response
+DSP-TC-622,Validation of implementation of TSM
+DSP-TC-623,Validation of @context property for TSM
+DSP-TC-624,Validation of @type property for TSM
+DSP-TC-625,Validation of consumerPid property in TSM
+DSP-TC-626,Validation of providerPid property in TSM
+DSP-TC-627,Validation of TSM dataAddress property
+DSP-TC-628,Validation of STARTED state in TP after TSM
+DSP-TC-629,Validation of implementation of TSuM
+DSP-TC-630,Validation of @context property for TSuM
+DSP-TC-631,Validation of @type property for TSuM
+DSP-TC-632,Validation of consumerPid property in TSuM
+DSP-TC-633,Validation of providerPid property in TSuM
+DSP-TC-634,Validation of SUSPENDED state in TP after TSuM
+DSP-TC-635,Validation of implementation of TCM
+DSP-TC-636,Validation of @context property for TCM
+DSP-TC-637,Validation of @type property for TCM
+DSP-TC-638,Validation of consumerPid property in TCM
+DSP-TC-639,Validation of providerPid property in TCM
+DSP-TC-640,Validation of COMPLETED state in TP after TCM
+DSP-TC-641,Validation of implementation of TTM
+DSP-TC-642,Validation of @context property for TTM
+DSP-TC-643,Validation of @type property for TTM
+DSP-TC-644,Validation of consumerPid property in TTM
+DSP-TC-645,Validation of providerPid property in TTM
+DSP-TC-646,Validation of TERMINATED state in TP after TTM
+DSP-TC-647,Validation of implementation of Transfer Process ACK
+DSP-TC-648,Validation of @context property for Transfer Process ACK
+DSP-TC-649,Validation of @type property for Transfer Process ACK
+DSP-TC-650,Validation of consumerPid property in Transfer Process ACK
+DSP-TC-651,Validation of providerPid property in Transfer Process ACK
+DSP-TC-652,Validation of state property in Transfer Process ACK
+DSP-TC-653,Validation of implementation of Transfer Error
+DSP-TC-654,Validation of @context property for Transfer Error
+DSP-TC-655,Validation of @type property for Transfer Error
+DSP-TC-656,Validation of consumerPid property in Transfer Error
+DSP-TC-657,Validation of providerPid property in Transfer Error
+DSP-TC-658,Validation of Error handling
+DSP-TC-659,Validation of implementation of /transfers Endpoint
+DSP-TC-660,Validation of /transfers Endpoint response
+DSP-TC-661,Validation of implementation of /transfers/request Endpoint
+DSP-TC-662,Validation of response of /transfers/request Endpoint
+DSP-TC-663,Validation of implementation of transfers/:providerPid/start Endpoint
+DSP-TC-664,Validation transfers/:providerPid/start Endpoint response
+DSP-TC-665,Validation of implementation of transfers/:providerPid/completion Endpoint
+DSP-TC-666,Validation of transfers/:providerPid/completion Endpoint response
+DSP-TC-667,Validation of implementation of transfers/:providerPid/termination Endpoint
+DSP-TC-668,Validation of transfers/:providerPid/termination Endpoint response
+DSP-TC-669,Validation of implementation of transfers/:providerPid/suspension Endpoint
+DSP-TC-670,Validation of transfers/:providerPid/suspension Endpoint response
+DSP-TC-671,Validation of implementation of transfers/:consumerPid/start Endpoint
+DSP-TC-672,Validation of transfers/:consumerPid/start Endpoint response
+DSP-TC-673,Validation of implementation of transfers/:consumerPid/completion Endpoint
+DSP-TC-674,Validation of transfers/:consumerPid/completion Endpoint response
+DSP-TC-675,Validation of implementation of transfers/:consumerPid/termination Endpoint
+DSP-TC-676,Validation of transfers/:consumerPid/termination Endpoint response
+DSP-TC-677,Validation of implementation of transfers/:consumerPid/suspension Endpoint
+DSP-TC-678,Validation of transfers/:consumerPid/suspension Endpoint response

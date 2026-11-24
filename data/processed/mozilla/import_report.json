@@ -1,0 +1,15 @@
+{
+  "citation": "Burak Yolacan (2024). Mozilla browser front-end software requirements and test scripts dataset, V1.",
+  "source": "https://doi.org/10.17632/jw5bgshtvg.1",
+  "license": "CC BY 4.0",
+  "files": {
+    "R-set.csv": "2910ee44ec7d09bd75ba89dc99d0ec7f12fa128a93109c2f326ec643f4515688",
+    "T-set.csv": "bfa2dcb26c3329f60c8cbc97d2ae67d60a172b7fef282eac40b1429f100aac4e"
+  },
+  "mapping": "published one-to-one R-XYZ to TC-XYZ",
+  "requirements": 184,
+  "test_cases": 184,
+  "reference_links": 184,
+  "excluded_query_ids": [],
+  "duplicate_case_text_groups": 0
+}

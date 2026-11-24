@@ -1,0 +1,30 @@
+{
+  "citation": "Jorge Gavilan (2025). Requirements Traceability Matrix - EDC, v1.",
+  "source": "https://doi.org/10.5281/zenodo.17546974",
+  "license": "CC BY 4.0",
+  "files": {
+    "edc.xlsx": "2d0275370b8553c3c525f19d852655e4da573b58999c8082f73016f7683f840c"
+  },
+  "requirement_sheet_only": [
+    [
+      "DSP-CAT-120",
+      "DSP-TC-524"
+    ]
+  ],
+  "test_sheet_only": [
+    [
+      "DSP-CAT-120",
+      "DSP-TC-522"
+    ]
+  ],
+  "excluded_disagreement_requirements": [
+    "DSP-CAT-120"
+  ],
+  "requirements": 157,
+  "test_cases": 177,
+  "reference_links": 176,
+  "excluded_query_ids": [
+    "DSP-CAT-120"
+  ],
+  "duplicate_case_text_groups": 2
+}

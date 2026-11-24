@@ -58,3 +58,33 @@ python -m experiment.run score --run-dir results/ebt-reproduction
 | `results/ebt-20261124/` | 本轮配置快照、排名、请求和响应、逐需求对比及汇总 |
 
 本轮指标和代表性案例见 [实验结果分析](results/ebt-20261124/analysis.md)。
+
+## 三项目扩展实验
+
+| 项目 | 可评分需求 | 候选用例 | 参考链接 | 数据出处 |
+| --- | ---: | ---: | ---: | --- |
+| EBT | 39 | 25 | 51 | [TRIAD 复现数据](https://github.com/huiAlex/TRIAD/tree/524929e892dd39b8b370ffeef17b4c6962210e07/dataset/ebt) |
+| Mozilla 前端 | 184 | 184 | 184 | [Burak Yolacan，2024，Mozilla browser front-end software requirements and test scripts dataset，V1](https://doi.org/10.17632/jw5bgshtvg.1)，CC BY 4.0 |
+| Eclipse EDC | 156 | 177 | 176 | [Jorge Gavilan，2025，Requirements Traceability Matrix - EDC，v1](https://doi.org/10.5281/zenodo.17546974)，CC BY 4.0 |
+
+Mozilla 的源 CSV 以分号分隔。根据发布者的同编号约定生成一对一参考链接，编号仅用于存储和评分。EDC 需求使用标题、正文和验收条件，用例使用描述字段。评分链接取工作簿需求页和用例页一致的映射，排除一条映射冲突的需求，保留全部用例参与检索。导入统一空白并去除显式制品 ID。原始资料和导出的预处理版本均按项目存放，导入报告记录版本、SHA-256 和筛选口径。 [CC BY 4.0 许可正文](https://creativecommons.org/licenses/by/4.0/)
+
+每个项目有五组结果。四个主实验组为 BM25、MiniLM、BM25 前 10 + DeepSeek、MiniLM 前 10 + DeepSeek。第五组重排 MiniLM 前 30 个候选，EBT 按实际候选库重排 25 个。各深度的重排以单次请求评估整个窗口，前 30 组的输出上限为 6,600 tokens。每个处理组沿用基线的窗口外排名和同等级次序。EBT 已有的两组检索和 MiniLM 前 10 重排通过原配置与请求校验后复用。
+
+结果保存在 `results/expansion-20261124/`。其中 `summary.csv` 为 15 个项目与方法组合，`contrasts.csv` 包含各对照的配对变化和按需求重采样的 95% Bootstrap 区间。各项目目录中的 `per-query.csv`、`paired.csv` 和重排子目录保存排名、指标和完整响应。运行方法与冻结配置写入该目录下的 JSON 文件。[汇总分析](results/expansion-20261124/analysis.md)列出主要差异、案例与 API 用量。旧 EBT 结果保存在 `results/ebt-20261124/`，扩展评分从该目录读取复用记录。
+
+离线复评分使用 Python 标准库。
+
+```powershell
+python -m experiment.expansion score
+```
+
+从固定原件重新导入并复跑，请在已按上文安装依赖和下载 MiniLM 权重的虚拟环境中使用新的结果目录。重排每完成一条便保存，重启同一目录会检查并跳过已写入的记录。
+
+```powershell
+python -m experiment.import_expansion mozilla
+python -m experiment.import_expansion edc
+python -m experiment.expansion prepare --run-dir results/expansion-reproduction
+python -m experiment.expansion rerank --run-dir results/expansion-reproduction
+python -m experiment.expansion score --run-dir results/expansion-reproduction
+```

@@ -1,2 +1,4 @@
 * text=auto eol=lf
 /data/raw/ebt/* -text -whitespace
+/data/raw/mozilla/* -text -whitespace
+/data/raw/edc/* -text -whitespace
