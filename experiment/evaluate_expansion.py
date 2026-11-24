@@ -8,9 +8,7 @@ from statistics import mean, median
 
 from .common import file_hash, read_json, write_json
 from .evaluate import add_usage, score_ranking, write_csv
-from .expansion import (
-    REUSED_TREATMENT, check_snapshot, dataset_dir, load_baselines, load_inputs, record_path,
-)
+from .expansion import check_snapshot, dataset_dir, load_baselines, load_inputs, record_path
 
 CONTRASTS = (
     ("semantic", "bm25"),
@@ -69,9 +67,9 @@ def check_reranking(record, query_id, original, cutoff):
         raise ValueError(f"{query_id}: unsupported reranking status")
 
 
-def score_project(run_dir, dataset, config):
+def score_project(run_dir, dataset, config, manifest):
     specification = config["datasets"][dataset]
-    baselines = load_baselines(run_dir, dataset, specification)
+    baselines = load_baselines(run_dir, dataset)
     queries, cases = load_inputs(dataset, specification)
     candidate_ids = set(cases)
     reference_path = dataset_dir(dataset) / "reference_links.csv"
@@ -92,7 +90,7 @@ def score_project(run_dir, dataset, config):
             parameters = treatments.get(method)
             ceiling, cutoff = "", ""
             if parameters:
-                path = record_path(run_dir, dataset, specification, method, query_id)
+                path = record_path(run_dir, dataset, method, query_id)
                 row = read_json(path)
                 original = baselines[parameters["baseline"]][query_id]["ranked_ids"]
                 cutoff = min(parameters["candidate_k"], len(cases))
@@ -126,11 +124,12 @@ def score_project(run_dir, dataset, config):
                 "rerank_candidate_k": cutoff, "rerank_recall_at_5_ceiling": ceiling,
             })
 
+    sources = manifest.get("method_sources", {}).get(dataset, {})
+    default_source = manifest["default_result_source"]
     summary, indexed = [], {}
     for method in ("bm25", "semantic", *treatments):
         rows = [row for row in query_records if row["method"] == method]
         indexed[method] = {row["query_id"]: row for row in rows}
-        reused = "prior_run" in specification and method in ("bm25", "semantic", REUSED_TREATMENT)
         summary.append({
             "dataset": dataset,
             "method": method,
@@ -148,7 +147,7 @@ def score_project(run_dir, dataset, config):
             "retries": counts[method]["retried_queries"],
             "fallbacks": counts[method]["fallback"],
             "api_attempts": counts[method]["attempts"],
-            "source": "ebt-20261124" if reused else "expansion",
+            "source": sources.get(method, default_source),
         })
 
     contrasts, paired_rows = [], []
@@ -187,10 +186,10 @@ def score_project(run_dir, dataset, config):
 
 def evaluate(run_dir):
     config = read_json(run_dir / "config.json")
-    check_snapshot(run_dir, config)
+    manifest = check_snapshot(run_dir)
     summaries, contrasts, details = [], [], {}
     for dataset in config["datasets"]:
-        results, changes, detail = score_project(run_dir, dataset, config)
+        results, changes, detail = score_project(run_dir, dataset, config, manifest)
         summaries.extend(results)
         contrasts.extend(changes)
         details[dataset] = detail

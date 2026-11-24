@@ -37,5 +37,29 @@
     "requests": "2.32.5",
     "tokenizers": "0.22.1",
     "openpyxl": "3.1.5"
+  },
+  "initial_ebt": {
+    "manifest": "ebt/initial/manifest.json",
+    "config_sha256_before_merge": "01a8b914fe76e7212747e87ffd4b289b33cc98b7ed094fc8583800961ca90679",
+    "prompts_sha256_before_merge": "c517abc6c79cfbe4510dd77683121865176b88eb84d140109109629ef115f7ac"
+  },
+  "default_result_source": "expansion",
+  "method_sources": {
+    "ebt": {
+      "bm25": "ebt-20261124",
+      "semantic": "ebt-20261124",
+      "semantic_deepseek_k10": "ebt-20261124"
+    }
+  },
+  "snapshot_sha256": {
+    "config.json": "f92e7fd91b981385de8af4e7a332b74244113ffd6b28e8958ed0951a0b8cd5ce",
+    "prompts.json": "c517abc6c79cfbe4510dd77683121865176b88eb84d140109109629ef115f7ac"
+  },
+  "resume_script_sha256": {
+    "common.py": "4d8cc53ea24b2340ff1960ab6f0eb2485712f82876981051e7ce073aa5e6ba5e",
+    "expansion.py": "8b96f7426f86f75a3f2583512a948e39d2f90c0f5ed1358709ab02f4c82efd00",
+    "retrieval.py": "064cde7f2df1d789cc7f32d679e6c0d179c0d28b71409d1496d2639ae5840818",
+    "rerank.py": "d91adc956d757224c7849d98953a911e65eeabfbf514359d060e33c862fa1de3",
+    "import_expansion.py": "4e7b82d310754cced4f0c6c3ad5beac6ce057ab413090641f955858ffdf419fe"
   }
 }

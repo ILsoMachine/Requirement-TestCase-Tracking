@@ -33,5 +33,5 @@
 
 - [summary.json](summary.json) 保存完整指标、配对变化、API 用量与校验统计。
 - [per-query.csv](per-query.csv) 保存 117 条完整排名和评分，[paired.csv](paired.csv) 保存每条需求的重排变化。
-- [baselines.json](baselines.json) 保存 BM25 和语义检索候选分数，[rerank/](rerank/) 保存 39 条需求的请求、原始响应和校验记录。
-- [manifest.json](manifest.json)、[config.json](config.json)、[prompts.json](prompts.json) 保存运行配置、文件哈希和实际提示词。[smoke.json](smoke.json) 保存手写样例的实调结果。
+- [baselines.json](../baselines.json) 保存 BM25 和语义检索候选分数，[semantic_deepseek_k10/](../semantic_deepseek_k10/) 保存 39 条需求的请求、原始响应和校验记录。
+- [首轮运行清单](manifest.json)保留原运行文件哈希。[合并后的配置](../../config.json)和[实际提示词](../../prompts.json)收录首轮所用参数和文本。[smoke.json](../../smoke.json)保存手写样例的实调结果。

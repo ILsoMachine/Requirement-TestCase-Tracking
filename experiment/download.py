@@ -29,7 +29,7 @@ def fetch(url, destination, digest):
 
 
 if __name__ == "__main__":
-    embedding = read_json(CONFIG)["embedding"]
+    embedding = read_json(CONFIG)["base"]["embedding"]
     base = f"https://huggingface.co/{embedding['repository']}/resolve/{embedding['revision']}"
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
     fetch(f"{base}/{embedding['onnx_file']}?download=true", MODEL_DIR / "model.onnx", embedding["onnx_sha256"])

@@ -1,6 +1,5 @@
 """Shared paths and serialization for EBT experiments."""
 
-import csv
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -8,8 +7,7 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data" / "processed" / "ebt"
-CONFIG = ROOT / "config" / "ebt.json"
+CONFIG = ROOT / "config" / "experiment.json"
 PROMPTS = ROOT / "prompts"
 MODEL_DIR = ROOT / ".cache" / "minilm"
 
@@ -46,8 +44,3 @@ def sha256_stream(stream):
     for block in iter(lambda: stream.read(1024 * 1024), b""):
         digest.update(block)
     return digest.hexdigest()
-
-
-def read_artifacts(filename):
-    with (DATA / filename).open(encoding="utf-8", newline="") as stream:
-        return {row["id"]: row["text"] for row in csv.DictReader(stream)}

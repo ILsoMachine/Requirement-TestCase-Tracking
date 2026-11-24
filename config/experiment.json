@@ -2,15 +2,7 @@
   "base": {
     "seed": 20261124,
     "display_k": 5,
-    "rerank_k": 10,
-    "excluded_query_ids": [
-      "100",
-      "101"
-    ],
-    "bm25": {
-      "k1": 1.5,
-      "b": 0.75
-    },
+    "bm25": {"k1": 1.5, "b": 0.75},
     "embedding": {
       "repository": "sentence-transformers/all-MiniLM-L6-v2",
       "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
@@ -26,45 +18,20 @@
       "documented_version": "DeepSeek-V4.1-Flash-1017",
       "thinking": "disabled",
       "temperature": 0,
-      "max_tokens": 2200,
       "timeout_seconds": 55,
       "max_attempts": 2,
       "retry_delay_seconds": 2
     }
   },
   "datasets": {
-    "ebt": {
-      "excluded_query_ids": [
-        "100",
-        "101"
-      ],
-      "prior_run": "results/ebt-20261124"
-    },
-    "mozilla": {
-      "excluded_query_ids": []
-    },
-    "edc": {
-      "excluded_query_ids": [
-        "DSP-CAT-120"
-      ]
-    }
+    "ebt": {"excluded_query_ids": ["100", "101"]},
+    "mozilla": {"excluded_query_ids": []},
+    "edc": {"excluded_query_ids": ["DSP-CAT-120"]}
   },
   "treatments": {
-    "bm25_deepseek_k10": {
-      "baseline": "bm25",
-      "candidate_k": 10,
-      "max_tokens": 2200
-    },
-    "semantic_deepseek_k10": {
-      "baseline": "semantic",
-      "candidate_k": 10,
-      "max_tokens": 2200
-    },
-    "semantic_deepseek_k30": {
-      "baseline": "semantic",
-      "candidate_k": 30,
-      "max_tokens": 6600
-    }
+    "bm25_deepseek_k10": {"baseline": "bm25", "candidate_k": 10, "max_tokens": 2200},
+    "semantic_deepseek_k10": {"baseline": "semantic", "candidate_k": 10, "max_tokens": 2200},
+    "semantic_deepseek_k30": {"baseline": "semantic", "candidate_k": 30, "max_tokens": 6600}
   },
   "bootstrap_resamples": 10000
 }
