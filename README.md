@@ -18,7 +18,7 @@ EBT 的导入脚本验证上游文件的 SHA-256、主键和参考链接，去�
 
 [config/experiment.json](config/experiment.json)统一定义数据筛选、模型版本、随机种子、候选窗口和重试规则。[prompts/](prompts/)保存评分准则、任务提示和引文校验要求。
 
-每个项目运行 BM25、MiniLM、BM25 前 10 + DeepSeek、MiniLM 前 10 + DeepSeek 和 MiniLM 前 30 + DeepSeek。EBT 的最后一组按候选库实际大小重排全部 25 条用例。MiniLM 通过 ONNX Runtime 在 CPU 上执行，对非填充位置取均值并归一化，跨片段取最大相似度。DeepSeek 使用 `deepseek-flash` 并关闭思考模式。重排按校验后的等级排序，同等级和窗口外候选沿用原有顺序。评分按项目报告宏平均 Recall@5、MAP 和逐需求配对变化。 [DeepSeek 模型与价格](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)
+每个项目运行 BM25、MiniLM、BM25 前 10 + DeepSeek、MiniLM 前 10 + DeepSeek 和 MiniLM 前 30 + DeepSeek。EBT 的最后一组按候选库实际大小重排全部 25 条用例。MiniLM 通过 ONNX Runtime 在 CPU 上执行，对非填充位置取均值并归一化，跨片段取最大相似度。DeepSeek 使用 `deepseek-flash` 并关闭思考模式。重排按校验后的等级排序，同等级和窗口外候选沿用原有顺序。评分按项目报告宏平均 Recall@5、首位命中率 Hit@1、MAP 和逐需求配对变化。Hit@1 的分母是有参考链接的评分需求数。 [DeepSeek 模型与价格](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)
 
 ## 结果结构
 
@@ -32,7 +32,7 @@ EBT 的导入脚本验证上游文件的 SHA-256、主键和参考链接，去�
 
 [实验汇总及案例](results/experiment-20261124/analysis.md)
 
-## 现场演示
+## 原型运行与验收
 
 在仓库根目录启动原型，然后打开 [http://127.0.0.1:8765](http://127.0.0.1:8765)。
 
@@ -40,11 +40,11 @@ EBT 的导入脚本验证上游文件的 SHA-256、主键和参考链接，去�
 python -m demo
 ```
 
-页面默认回放 EBT 需求 137 的归档结果。用例 164 从 MiniLM 第 7 名升到 DeepSeek 重排第 2 名。点击该候选可查看高亮原文及模型判定理由，确认后可在「已确认链接」处从用例反查需求，并导出 CSV。确认记录保存在当前浏览器，同一项目、需求、用例组合会去重。
+在页面上选择项目、需求和排序配置。运行重排或归档回放时，页面并列展示基线与重排的前五项，并提供需求和用例的原文证据及判定理由。确认链接后，可按用例反查已关联的需求并导出 CSV。
 
 - **实时检索 + 实时重排**使用冻结的提示词和配置，在本机执行检索，并向 DeepSeek 提交所选需求的候选窗口。使用下文的 Python 环境、模型文件和密钥设置。
-- **仅实时检索（离线）**可演示本地 BM25 或 MiniLM。MiniLM 需要已下载模型及下文依赖。
-- **归档回放**读取正式实验的基线排名与重排记录，页面标注来源和当时的耗时。Python 标准库即可运行，适合没有网络时演示。
+- **仅实时检索（离线）**在本地运行 BM25 或 MiniLM。MiniLM 需要已下载的模型及下文所列依赖。
+- **归档回放**读取正式实验的基线排名、重排记录和查询耗时。使用 Python 标准库即可运行，无需网络或 API 密钥。
 
 页面的确认操作独立于实验参考矩阵，并支持 EBT、Mozilla 前端和 Eclipse EDC。端口占用时可通过 `python -m demo --port 8766` 指定端口，并打开终端显示的地址。
 

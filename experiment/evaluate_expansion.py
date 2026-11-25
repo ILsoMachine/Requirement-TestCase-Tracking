@@ -140,6 +140,8 @@ def score_project(run_dir, dataset, config, manifest):
             "dataset": dataset,
             "method": method,
             "queries": len(rows), "candidates": len(cases), "reference_links": sum(map(len, references.values())),
+            "hit_at_1": mean(row["hit_at_1"] for row in rows),
+            "top1_hits": sum(row["hit_at_1"] for row in rows),
             "recall_at_5": mean(row["recall_at_5"] for row in rows),
             "recall_at_10": mean(row["recall_at_10"] for row in rows),
             "recall_at_30": mean(row["recall_at_30"] for row in rows),
@@ -161,13 +163,18 @@ def score_project(run_dir, dataset, config, manifest):
         per_metric = defaultdict(list)
         for query_id in sorted(references):
             after_row, before_row = indexed[after][query_id], indexed[before][query_id]
-            deltas = {metric: after_row[metric] - before_row[metric] for metric in ("recall_at_5", "ap")}
+            deltas = {
+                metric: after_row[metric] - before_row[metric] for metric in ("recall_at_5", "ap", "hit_at_1")
+            }
             paired_rows.append({
                 "dataset": dataset, "query_id": query_id, "after": after, "before": before,
                 "reference_ids": sorted(references[query_id]),
                 "before_top5": before_row["ranked_ids"][:display_k],
                 "after_top5": after_row["ranked_ids"][:display_k],
                 "before_top10": before_row["ranked_ids"][:10],
+                "before_hit_at_1": before_row["hit_at_1"],
+                "after_hit_at_1": after_row["hit_at_1"],
+                "delta_hit_at_1": deltas["hit_at_1"],
                 "before_recall_at_5": before_row["recall_at_5"],
                 "after_recall_at_5": after_row["recall_at_5"],
                 "delta_recall_at_5": deltas["recall_at_5"], "delta_ap": deltas["ap"],

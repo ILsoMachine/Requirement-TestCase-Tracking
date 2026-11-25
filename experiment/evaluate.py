@@ -16,6 +16,7 @@ def score_ranking(ranked_ids, related, candidate_ids, display_k, rerank_k):
             hits += 1
             precision_sum += hits / position
     return {
+        "hit_at_1": int(ranked_ids[0] in related),
         f"recall_at_{display_k}": len(related.intersection(ranked_ids[:display_k])) / len(related),
         f"recall_at_{rerank_k}": len(related.intersection(ranked_ids[:rerank_k])) / len(related),
         "ap": precision_sum / len(related),
